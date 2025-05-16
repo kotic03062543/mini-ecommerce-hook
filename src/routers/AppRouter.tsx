@@ -16,9 +16,30 @@ function AppRouter() {
           </Layout>
         }
       />
-      <Route path="/About" element={<About />} />
-      <Route path="/ProductDetail/:id" element={<ProductDetail />} />
-      <Route path="*" element={<PageNotFound />} />
+      <Route
+        path="/About"
+        element={
+          <Layout>
+            <About />
+          </Layout>
+        }
+      />
+      <Route
+        path="/ProductDetail/:id"
+        element={
+          <Layout>
+            <ProductDetail />
+          </Layout>
+        }
+      />
+      <Route
+        path="*"
+        element={
+          <Layout>
+            <PageNotFound />
+          </Layout>
+        }
+      />
     </Routes>
   );
 }

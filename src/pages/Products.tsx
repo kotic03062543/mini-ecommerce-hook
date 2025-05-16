@@ -76,19 +76,21 @@ function Products() {
     console.log("useInput", useInput);
     console.log("products filter :", products);
     setFilteredProducts(rs);
-  }, [useInput, filteredProducts]);
+  }, [useInput]);
 
   return (
-    <div className="flex flex-col items-center justify-start bg-white p-10 gap-10">
+    <div className="flex flex-col items-center justify-start bg-white p-10 gap-3">
       <div className="text-center flex flex-col gap-3">
         <h1 className="text-3xl font-bold">Our Products</h1>
-        <SearchInput
-          value={useInput}
-          onChange={(e) => setInput(e.target.value)}
-          placeholder="Search by name"
-        ></SearchInput>
       </div>
-      <div className="flex flex-wrap justify-center gap-5">
+      <div className="flex flex-wrap justify-center gap-5 border">
+        <div className="w-full flex justify-end border">
+          <SearchInput
+            value={useInput}
+            onChange={(e) => setInput(e.target.value)}
+            placeholder="Search by name"
+          ></SearchInput>
+        </div>
         {filteredProducts.map((p) => (
           <Link
             key={p.id}
