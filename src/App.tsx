@@ -1,14 +1,15 @@
-import Layout from "./components/Latout";
-import Home from "./pages/Home";
-import Products from "./pages/Products";
+import Layout from "./components/Layout";
 import AppRouter from "./routers/AppRouter";
+import UserContextProvider from "./contexts/UserContext";
 
 function App() {
   return (
     <>
-      <Layout>
+      <UserContextProvider>
+        {/* <Layout> */}
         <AppRouter />
-      </Layout>
+        {/* </Layout> */}
+      </UserContextProvider>
     </>
   );
 }
