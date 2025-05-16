@@ -83,8 +83,8 @@ function Products() {
       <div className="text-center flex flex-col gap-3">
         <h1 className="text-3xl font-bold">Our Products</h1>
       </div>
-      <div className="flex flex-wrap justify-center gap-5 border">
-        <div className="w-full flex justify-end border">
+      <div className="flex flex-wrap justify-center gap-5">
+        <div className="w-full flex justify-center m-2">
           <SearchInput
             value={useInput}
             onChange={(e) => setInput(e.target.value)}
@@ -97,11 +97,7 @@ function Products() {
             to={`/ProductDetail/${p.id}`}
             className="flex flex-col items-center bg-gray-200"
           >
-            <img
-              className="max-w-[300px] h-80 object-cover"
-              src={p.img}
-              alt=""
-            />
+            <img className="flex flex-1 h-80 object-cover" src={p.img} alt="" />
             <div className="w-full flex flex-col p-3 items-start">
               <p className="font-bold text-xl">{p.name}</p>
               <p>{p.detail}</p>
