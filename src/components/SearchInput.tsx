@@ -1,4 +1,5 @@
 import type { ChangeEvent } from "react";
+import { debounce } from "lodash";
 
 interface SearchInputProps {
   value: string;

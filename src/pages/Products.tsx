@@ -1,6 +1,7 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import SearchInput from "../components/SearchInput";
+import { CartContext } from "../contexts/CartContext";
 
 function Products() {
   const products = [
@@ -72,14 +73,32 @@ function Products() {
     const rs = products.filter((p) => {
       return p.name.toLowerCase().includes(useInput.toLowerCase());
     });
-    console.log("rs", rs);
-    console.log("useInput", useInput);
-    console.log("products filter :", products);
+    // console.log("rs", rs);
+    // console.log("useInput", useInput);
+    // console.log("products filter :", products);
     setFilteredProducts(rs);
   }, [useInput]);
 
+  const cartContext = useContext(CartContext);
+  if (!cartContext) {
+    console.error("CartContext is null");
+    return null;
+  }
+  const { setCarts } = cartContext;
+  let index = 1;
+
   return (
     <div className="flex flex-col items-center justify-start bg-white p-10 gap-3">
+      <button
+        onClick={() => {
+          setCarts([...cartContext.useCart, index.toString()]);
+          index++;
+          console.log("cartContext.useCart", cartContext.useCart);
+        }}
+        className=""
+      >
+        add to cart
+      </button>
       <div className="text-center flex flex-col gap-3">
         <h1 className="text-3xl font-bold">Our Products</h1>
       </div>

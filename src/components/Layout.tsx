@@ -1,7 +1,9 @@
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 
-function Layout({ children }) {
+import type { ReactNode } from "react";
+
+function Layout({ children }: { children: ReactNode }) {
   return (
     <div>
       <Navbar />

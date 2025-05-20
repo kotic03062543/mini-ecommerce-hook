@@ -1,7 +1,14 @@
 import { useState, createContext } from "react";
+import type { ReactNode } from "react";
 
-export const UserContext = createContext(null);
-function UserContextProvider({ children }) {
+interface UserContextType {
+  useName: string;
+  setName: React.Dispatch<React.SetStateAction<string>>;
+}
+
+export const UserContext = createContext<UserContextType | null>(null);
+
+function UserContextProvider({ children }: { children: ReactNode }) {
   const [useName, setName] = useState<string>("KK");
   return (
     <UserContext.Provider value={{ useName, setName }}>
