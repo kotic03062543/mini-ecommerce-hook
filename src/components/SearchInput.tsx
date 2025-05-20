@@ -1,8 +1,7 @@
 import type { ChangeEvent } from "react";
-import { debounce } from "lodash";
 
 interface SearchInputProps {
-  value: string;
+  value?: string;
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
   placeholder?: string;
 }
@@ -11,7 +10,7 @@ function SearchInput({ value, onChange, placeholder }: SearchInputProps) {
   return (
     <div className="max-w-lg">
       <div className="relative">
-        <div className="w-10 absolute inset-y-0 start-0 flex justify-center items-center ps-3 pointer-events-none">
+        <div className="w-10 absolute inset-y-0 flex justify-center items-center ps-3 pointer-events-none">
           <svg
             className="w-4 h-4 text-gray-500 dark:text-gray-400"
             aria-hidden="true"
