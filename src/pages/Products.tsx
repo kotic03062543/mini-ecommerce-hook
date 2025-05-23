@@ -3,9 +3,13 @@ import { useNavigate } from "react-router-dom";
 // import { Link } from "react-router-dom";
 import SearchInput from "../components/SearchInput";
 import { CartContext } from "../contexts/CartContext";
-import { debounce, update } from "lodash";
+import { debounce } from "lodash";
+import CartItem from "./CartItem";
 
 function Products() {
+  //เช็ค performance ว่า render ทุกครั้งไหม
+  console.log("render");
+
   const products = [
     {
       id: 1,
@@ -64,23 +68,30 @@ function Products() {
       img: "https://images.unsplash.com/photo-1616047006789-b7af5afb8c20?q=80&w=1160&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     },
   ];
+
   const [useInput, setInput] = useState<string>("");
+
+  // จัดการใน onChange ดีกว่า
+  // useEffect(() => {
+  //   test("test");
+
+  //   return () => {
+  //     // ทำ
+  //     console.log("unmount");
+  //   };
+  // }, []);
+
+  // console.log("useName", useName);
+
   const navigate = useNavigate();
   // const [useInput, setInput] = useState<string>("");
   const [filteredProducts, setFilteredProducts] = useState(products);
+  //
+  // useEffect(() => {
 
-  useEffect(() => {
-    if (useInput.trim().toLocaleLowerCase()) {
-      setFilteredProducts(products);
-    }
-    const rs = products.filter((p) => {
-      return p.name.toLowerCase().includes(useInput.toLowerCase());
-    });
-    // console.log("rs", rs);
-    // console.log("useInput", useInput);
-    // console.log("products filter :", products);
-    setFilteredProducts(rs);
-  }, [useInput]);
+  // }, [useInput]);
+
+  // log ตอน component
 
   // add to cart
   const cartContext = useContext(CartContext);
@@ -89,9 +100,6 @@ function Products() {
     return null;
   }
   const { setCarts } = cartContext;
-  function handleSearch(search: string) {
-    setInput(search);
-  }
   function updateCartWithProduct(id: string) {
     if (cartContext) {
       // ค้นหาสินค้าที่มี id เดียวกันในตะกร้า
@@ -110,7 +118,22 @@ function Products() {
       }
     }
   }
-  const debouncedSearch = debounce(handleSearch, 500);
+
+  function handleSearch(search: string) {
+    setInput(useInput);
+    if (useInput.trim().toLocaleLowerCase()) {
+      setFilteredProducts(products);
+    }
+    const rs = products.filter((p) => {
+      return p.name.toLowerCase().includes(useInput.toLowerCase());
+    });
+    // console.log("rs", rs);
+    // console.log("useInput", useInput);
+    // console.log("products filter :", products);
+    setFilteredProducts(rs);
+    console.log("search", search);
+  }
+  const debouncedSearch = debounce(handleSearch, 2000);
   // const debouncedSearch = useCallback(debounce(handleSearch, 2000), []);
 
   return (
@@ -129,31 +152,44 @@ function Products() {
           />
         </div>
         {filteredProducts.map((p) => (
-          <div
-            onClick={() => navigate(`/ProductDetail/${p.id}`)}
+          <CartItem
             key={p.id}
-            className="flex flex-col items-center bg-gray-200 cursor-pointer"
-          >
-            <img className="flex flex-1 h-80 object-cover" src={p.img} alt="" />
-            <div className="w-full flex flex-col p-3 items-start">
-              <p className="font-bold text-xl">{p.name}</p>
-              <p>{p.detail}</p>
-              <p>
-                Price : <span className="text-xl text-red-600">{p.price}</span>{" "}
-                $
-              </p>
-            </div>
-            <button
-              onClick={(e) => {
-                e.stopPropagation(); // ป้องกันการ trigger navigate
-                updateCartWithProduct(p.id.toString());
-                console.log("update cart", p.id);
-              }}
-              className="text-white rounded-lg p-2 my-2 bg-blue-500 hover:bg-blue-700 transition-all duration-300"
-            >
-              add to cart
-            </button>
-          </div>
+            product={p}
+            // setName={setName} // ไม่ควร
+            // name={useName} // ระวัง side effect
+            onClick={() => navigate(`/ProductDetail/${p.id}`)}
+            onAddToCart={() => {
+              // e.stopPropagation();
+              // test();
+              updateCartWithProduct(p.id.toString());
+            }}
+          />
+          // <div
+          //   onClick={() => navigate(`/ProductDetail/${p.id}`)}
+          //   key={p.id}
+          //   className="flex flex-col max-w-[350px] items-center bg-gray-200 cursor-pointer m-2"
+          // >
+          //   <img className="flex flex-1 h-80 object-cover" src={p.img} alt="" />
+          //   <div className="w-full flex flex-col p-3 items-start">
+          //     <p className="font-bold text-xl">{p.name}</p>
+          //     <p>{p.detail}</p>
+          //     <p>
+          //       Price : <span className="text-xl text-red-600">{p.price}</span>{" "}
+          //       $
+          //     </p>
+          //   </div>
+          //   <button
+          //     onClick={(e) => {
+          //       e.stopPropagation(); // ป้องกันการ trigger navigate
+          //       // updateCartWithProduct(p.id.toString());
+          //       // console.log("update cart", p.id);
+          //       test(p.name);
+          //     }}
+          //     className="text-white rounded-lg p-2 my-2 bg-blue-500 hover:bg-blue-700 transition-all duration-300"
+          //   >
+          //     add to cart
+          //   </button>
+          // </div>
         ))}
       </div>
     </div>

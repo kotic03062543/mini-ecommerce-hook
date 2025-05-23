@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { UserContext } from "../contexts/UserContext";
 import { CartContext } from "../contexts/CartContext";
-import AddToCartStr from "../utils/AddToCartStr";
+// import AddToCartStr from "../utils/AddToCartStr";
 
 function Navbar() {
   const userContext = useContext(UserContext);
@@ -14,8 +14,8 @@ function Navbar() {
   const { useName } = userContext;
   const { useCart } = cartContext;
 
-  const { cartItems } = AddToCartStr();
-  console.log(cartItems);
+  // const { cartItems } = AddToCartStr();
+  // console.log(cartItems);
 
   return (
     <nav className="bg-white p-4 hidden flex-row md:flex justify-around items-center shadow-md sticky top-0 z-10">
