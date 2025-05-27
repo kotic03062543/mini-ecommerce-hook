@@ -18,7 +18,7 @@ const CartItem: React.FC<CartItemProps> = ({
   onClick,
   onAddToCart,
 }) => {
-  console.log("reder cart");
+//   console.log("reder cart");
   useEffect(() => {
     console.log("useEffect cartitem");
   }, []);

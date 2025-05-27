@@ -1,15 +1,9 @@
-import { useEffect, useState, useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-// import { Link } from "react-router-dom";
-import SearchInput from "../components/SearchInput";
-import { CartContext } from "../contexts/CartContext";
+import { CartContext } from "../../contexts/CartContext";
 import { debounce } from "lodash";
-import CartItem from "./CartItem";
 
-function Products() {
-  //เช็ค performance ว่า render ทุกครั้งไหม
-  console.log("render");
-
+function ProductsViewModel() {
   const products = [
     {
       id: 1,
@@ -69,7 +63,7 @@ function Products() {
     },
   ];
 
-  const [useInput, setInput] = useState<string>("");
+  //   const [useInput, setInput] = useState<string>("");
 
   // จัดการใน onChange ดีกว่า
   // useEffect(() => {
@@ -84,7 +78,6 @@ function Products() {
   // console.log("useName", useName);
 
   const navigate = useNavigate();
-  // const [useInput, setInput] = useState<string>("");
   const [filteredProducts, setFilteredProducts] = useState(products);
   //
   // useEffect(() => {
@@ -119,81 +112,34 @@ function Products() {
     }
   }
 
+  useEffect(() => {
+    console.log("filteredProducts", filteredProducts);
+  }, [filteredProducts]);
+
   function handleSearch(search: string) {
-    setInput(useInput);
-    if (useInput.trim().toLocaleLowerCase()) {
+    console.log("search", search);
+    // setInput(search); // ค่าไม่เปลี่ยนทันที
+    if (!search.trim().toLocaleLowerCase()) {
       setFilteredProducts(products);
+      return;
     }
     const rs = products.filter((p) => {
-      return p.name.toLowerCase().includes(useInput.toLowerCase());
+      return p.name.toLowerCase().includes(search.toLowerCase());
     });
-    // console.log("rs", rs);
+    console.log("rs", rs);
     // console.log("useInput", useInput);
     // console.log("products filter :", products);
     setFilteredProducts(rs);
-    console.log("search", search);
   }
-  const debouncedSearch = debounce(handleSearch, 2000);
+  const debouncedSearch = debounce(handleSearch, 500);
   // const debouncedSearch = useCallback(debounce(handleSearch, 2000), []);
 
-  return (
-    <div className="flex flex-col items-center justify-start bg-white p-10 gap-3">
-      <div className="text-center flex flex-col gap-3">
-        <h1 className="text-3xl font-bold">Our Products</h1>
-      </div>
-      <div className="flex flex-wrap justify-center gap-5">
-        <div className="w-full flex justify-center m-2">
-          <SearchInput
-            // value={useInput}
-            onChange={(e) => {
-              debouncedSearch(e.target.value);
-            }}
-            placeholder="Search by name"
-          />
-        </div>
-        {filteredProducts.map((p) => (
-          <CartItem
-            key={p.id}
-            product={p}
-            // setName={setName} // ไม่ควร
-            // name={useName} // ระวัง side effect
-            onClick={() => navigate(`/ProductDetail/${p.id}`)}
-            onAddToCart={() => {
-              // e.stopPropagation();
-              // test();
-              updateCartWithProduct(p.id.toString());
-            }}
-          />
-          // <div
-          //   onClick={() => navigate(`/ProductDetail/${p.id}`)}
-          //   key={p.id}
-          //   className="flex flex-col max-w-[350px] items-center bg-gray-200 cursor-pointer m-2"
-          // >
-          //   <img className="flex flex-1 h-80 object-cover" src={p.img} alt="" />
-          //   <div className="w-full flex flex-col p-3 items-start">
-          //     <p className="font-bold text-xl">{p.name}</p>
-          //     <p>{p.detail}</p>
-          //     <p>
-          //       Price : <span className="text-xl text-red-600">{p.price}</span>{" "}
-          //       $
-          //     </p>
-          //   </div>
-          //   <button
-          //     onClick={(e) => {
-          //       e.stopPropagation(); // ป้องกันการ trigger navigate
-          //       // updateCartWithProduct(p.id.toString());
-          //       // console.log("update cart", p.id);
-          //       test(p.name);
-          //     }}
-          //     className="text-white rounded-lg p-2 my-2 bg-blue-500 hover:bg-blue-700 transition-all duration-300"
-          //   >
-          //     add to cart
-          //   </button>
-          // </div>
-        ))}
-      </div>
-    </div>
-  );
+  return {
+    debouncedSearch,
+    filteredProducts,
+    navigate,
+    updateCartWithProduct,
+  };
 }
 
-export default Products;
+export default ProductsViewModel;
