@@ -1,8 +1,16 @@
 import { useParams } from "react-router-dom";
 import { serviceGetProductDetails } from "../services/ProductDetails/index";
 import { useQuery } from "@tanstack/react-query";
+import useProductsViewModel from "./Products/ProductsViewModel";
 
 function ProductDetail() {
+  const viewModel = useProductsViewModel();
+
+  if (!viewModel) {
+    return <div>Error: Unable to load products.</div>;
+  }
+  const { updateCartWithProduct } = viewModel;
+
   const { id: productId } = useParams();
   const { data: product, isLoading } = useQuery({
     queryKey: ["getProductDetails", productId],
@@ -42,7 +50,7 @@ function ProductDetail() {
           <p className="mt-2 text-sm text-gray-700">{product.description}</p>
         </div>
         <button
-          onClick={() => alert("Added to cart")}
+          onClick={() => updateCartWithProduct(product)}
           className="mt-5 w-full bg-purple-600 text-white py-3 rounded hover:bg-purple-700"
         >
           Add to cart
