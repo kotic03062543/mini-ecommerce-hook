@@ -36,7 +36,7 @@ function useProductsViewModel() {
   if (!cartContext)
     throw new Error("CartContext is not available. Please wrap in provider.");
   const { setCarts } = cartContext;
-  function updateCartWithProduct(product) {
+  function updateCartWithProduct(product: any) {
     setCarts((prevCart) => {
       const existingIndex = prevCart.findIndex(
         (item) => item.product.id === product.id
@@ -62,10 +62,10 @@ function useProductsViewModel() {
 
   const filteredProducts = useMemo(() => {
     return products
-      .filter((p) =>
+      .filter((p: any) =>
         selectedCategory ? p.category === selectedCategory : true
       )
-      .filter((p) =>
+      .filter((p: any) =>
         searchTerm ? p.title.toLowerCase().includes(searchTerm) : true
       );
   }, [products, selectedCategory, searchTerm]);

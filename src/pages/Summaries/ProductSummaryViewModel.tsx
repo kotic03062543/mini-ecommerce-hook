@@ -35,7 +35,7 @@ function ProductSummaryViewModel() {
       );
       if (existingIndex !== -1) {
         const updatedCart = [...prevCart];
-        if (updatedCart[existingIndex].quantity > 1) {
+        if (updatedCart[existingIndex].quantity > 1) { 
           updatedCart[existingIndex].quantity -= 1;
         } else {
           updatedCart.splice(existingIndex, 1); // ลบรายการถ้าจำนวนเป็น 1

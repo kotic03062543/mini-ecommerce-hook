@@ -24,7 +24,7 @@ function Products() {
   } = viewModel;
 
   const catchData = useMemo(() => {
-    return filteredProducts.map((p) => (
+    return filteredProducts.map((p : any) => (
       <CartItem
         key={p.id}
         product={p}
@@ -43,7 +43,7 @@ function Products() {
       </div>
       <div className="flex flex-wrap justify-center gap-3 ">
         {categories && categories.length > 0 ? (
-          categories.map((cat) => (
+          categories.map((cat : any) => (
             <button
               key={cat}
               className={`px-4 py-2 rounded border ${
