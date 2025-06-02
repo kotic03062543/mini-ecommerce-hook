@@ -4,6 +4,7 @@ import PageNotFound from "../pages/PageNotFound";
 import About from "../pages/About";
 import ProductDetail from "../pages/ProductDetail";
 import Layout from "../components/Layout";
+import Contract from "../pages/Contract";
 
 function AppRouter() {
   return (
@@ -29,6 +30,14 @@ function AppRouter() {
         element={
           <Layout>
             <ProductDetail />
+          </Layout>
+        }
+      />
+      <Route
+        path="/Contract"
+        element={
+          <Layout>
+            <Contract />
           </Layout>
         }
       />

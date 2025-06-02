@@ -1,11 +1,11 @@
 function Footer() {
   return (
-    <footer className="bg-white text-center shadow-2xl">
+    <footer className="bg-white text-center shadow-2xl h-[100px]">
       <div className="w-full mx-auto max-w-screen-xl p-4 md:flex md:items-center md:justify-between">
         <span className="text-sm text-gray-500 sm:text-center">
-          © 2023{" "}
-          <a href="/" className="hover:underline">
-            Flowbite™
+          © 2025{" "}
+          <a href="/" className="hover:underline text-blue-300">
+            KK™
           </a>
           . All Rights Reserved.
         </span>
@@ -26,7 +26,7 @@ function Footer() {
             </a>
           </li>
           <li>
-            <a href="/" className="hover:underline">
+            <a href="Contract" className="hover:underline">
               Contact
             </a>
           </li>

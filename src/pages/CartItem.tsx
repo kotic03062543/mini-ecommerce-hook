@@ -1,9 +1,7 @@
-import { useEffect, useState } from "react";
-
 interface Product {
-  img: string;
-  name: string;
-  detail: string;
+  image: string;
+  title: string;
+  description: string;
   price: number;
 }
 
@@ -18,26 +16,24 @@ const CartItem: React.FC<CartItemProps> = ({
   onClick,
   onAddToCart,
 }) => {
-//   console.log("reder cart");
-  useEffect(() => {
-    console.log("useEffect cartitem");
-  }, []);
-
   return (
     <div
       onClick={onClick}
       className="flex flex-col max-w-[350px] items-center bg-gray-200 cursor-pointer m-2"
     >
-      <img
-        className="flex flex-1 h-80 object-cover"
-        src={product.img}
-        alt={product.name}
-      />
+      <div className="aspect-[4/3] w-full overflow-hidden">
+        <img
+          className="w-full h-full object-cover"
+          src={product.image}
+          alt={product.title}
+        />
+      </div>
+
       <div className="w-full flex flex-col p-3 items-start">
-        <p className="font-bold text-xl">{product.name}</p>
-        <p>{product.detail}</p>
+        <p className="font-bold text-xl line-clamp-1">{product.title}</p>
+        <p className="line-clamp-3">{product.description}</p>
         <p>
-          Price : <span className="text-xl text-red-600">{product.price}</span>{" "}
+          Price : <span className="text-xl text-red-600">{product.price}</span>
           $
         </p>
       </div>

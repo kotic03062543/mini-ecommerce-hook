@@ -24,9 +24,9 @@ function Home() {
     staleTime: 1000 * 60 * 5, // เวลาที่ข้อมูลจะถูก cache (5 นาที)
   });
 
-  console.log("data", data); // ข้อมูลที่ได้จาก api
-  console.log("isLoading", isLoading);
-  console.log("isFetching", isFetching);
+  // console.log("data", data); // ข้อมูลที่ได้จาก api
+  // console.log("isLoading", isLoading);
+  // console.log("isFetching", isFetching);
 
   // refetch();
 
