@@ -5,6 +5,7 @@ import { CartContext } from "../contexts/CartContext";
 import ProductSummary from "../pages/Summaries/ProductSummaryView";
 import { FiShoppingCart } from "react-icons/fi";
 // import AddToCartStr from "../utils/AddToCartStr";
+import Logo from "../assets/valentin-day.png";
 
 function Navbar() {
   const userContext = useContext(UserContext);
@@ -24,7 +25,9 @@ function Navbar() {
 
   return (
     <nav className="bg-white p-4 hidden flex-row md:flex justify-around items-center shadow-md sticky top-0 z-10">
-      <div>LOGO</div>
+      <div>
+        <img src={Logo} alt="" className="w-13" />
+      </div>
       <div className="flex gap-5">
         <Link to="/" className="text-md  text-gray-800 hover:text-gray-600">
           Home
