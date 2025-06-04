@@ -12,6 +12,7 @@ function ProductSummaryViewModel() {
     0
   );
   const upQuantity = (productId: string) => {
+    console.log("upQuantity", productId);
     setCarts((prevCart) => {
       const existingIndex = prevCart.findIndex(
         (item) => item.product.id === productId
@@ -22,6 +23,7 @@ function ProductSummaryViewModel() {
     });
   };
   const downQuantity = (productId: string) => {
+    console.log("downQuantity", productId);
     setCarts((prevCart) => {
       const existingIndex = prevCart.findIndex(
         (item) => item.product.id === productId
@@ -30,7 +32,7 @@ function ProductSummaryViewModel() {
       if (updatedCart[existingIndex].quantity > 1) {
         updatedCart[existingIndex].quantity -= 1;
       } else {
-        updatedCart.splice(existingIndex, 1); // ลบรายการถ้าจำนวนเป็น 1
+        updatedCart.splice(existingIndex, 1);
       }
       return updatedCart;
     });
