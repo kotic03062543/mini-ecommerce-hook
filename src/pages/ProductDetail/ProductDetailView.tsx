@@ -1,32 +1,14 @@
-import { useParams } from "react-router-dom";
-import { serviceGetProductDetails } from "../services/ProductDetails/index";
-import { useQuery } from "@tanstack/react-query";
-import useProductsViewModel from "./Products/ProductsViewModel";
-import Breadcrumb from "../components/Breadcrumb";
+import Breadcrumb from "../../components/Breadcrumb";
+import useProductDetailViewModel from "./ProductDetailViewModel";
 
 function ProductDetail() {
   // console.log("ProductDetail");
-  const viewModel = useProductsViewModel();
-
+  const viewModel = useProductDetailViewModel();
   if (!viewModel) {
     return <div>Error: Unable to load products.</div>;
   }
-  const { updateCartWithProduct } = viewModel;
-
-  const { id: productId } = useParams();
-  const { data: product, isLoading } = useQuery({
-    queryKey: ["getProductDetails", productId],
-    queryFn: async () => {
-      return await serviceGetProductDetails(productId || "");
-    },
-    enabled: !!productId,
-  });
-
-  const breadcrumbItems = [
-    { label: "Home", link: "/" },
-    { label: "ProductDetail", link: `/ProductDetail/${productId}` },
-    { label: product?.title, link: "#" },
-  ];
+  const { updateCartWithProduct, product, isLoading, breadcrumbItems }: any =
+    viewModel;
 
   if (isLoading) {
     return (
