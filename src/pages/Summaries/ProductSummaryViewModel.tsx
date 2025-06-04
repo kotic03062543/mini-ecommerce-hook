@@ -16,16 +16,9 @@ function ProductSummaryViewModel() {
       const existingIndex = prevCart.findIndex(
         (item) => item.product.id === productId
       );
-      if (existingIndex !== -1) {
-        const updatedCart = [...prevCart];
-        updatedCart[existingIndex].quantity += 1;
-        return updatedCart;
-      } else {
-        return [
-          ...prevCart,
-          { product: { id: productId } as any, quantity: 1 },
-        ];
-      }
+      const updatedCart = [...prevCart];
+      updatedCart[existingIndex].quantity += 1;
+      return updatedCart;
     });
   };
   const downQuantity = (productId: string) => {
@@ -33,16 +26,13 @@ function ProductSummaryViewModel() {
       const existingIndex = prevCart.findIndex(
         (item) => item.product.id === productId
       );
-      if (existingIndex !== -1) {
-        const updatedCart = [...prevCart];
-        if (updatedCart[existingIndex].quantity > 1) { 
-          updatedCart[existingIndex].quantity -= 1;
-        } else {
-          updatedCart.splice(existingIndex, 1); // ลบรายการถ้าจำนวนเป็น 1
-        }
-        return updatedCart;
+      const updatedCart = [...prevCart];
+      if (updatedCart[existingIndex].quantity > 1) {
+        updatedCart[existingIndex].quantity -= 1;
+      } else {
+        updatedCart.splice(existingIndex, 1); // ลบรายการถ้าจำนวนเป็น 1
       }
-      return prevCart;
+      return updatedCart;
     });
   };
 
