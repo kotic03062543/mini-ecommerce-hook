@@ -1,4 +1,4 @@
-import { useCallback, useContext, useMemo, useState } from "react";
+import { useContext, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { CartContext } from "../../contexts/CartContext";
 import { debounce } from "lodash";
@@ -25,7 +25,6 @@ function useProductsViewModel() {
   const products = data || [];
   const categories = Catagorie || [];
 
-  // const [filteredProducts, setFilteredProducts] = useState(products);
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [searchTerm, setSearchTerm] = useState("");
 
@@ -37,6 +36,7 @@ function useProductsViewModel() {
     throw new Error("CartContext is not available. Please wrap in provider.");
   const { setCarts } = cartContext;
   function updateCartWithProduct(product: any) {
+    console.log("Adding product to cart:", product);
     setCarts((prevCart) => {
       const existingIndex = prevCart.findIndex(
         (item) => item.product.id === product.id
@@ -53,14 +53,17 @@ function useProductsViewModel() {
   }
 
   // Update set search term
-  const handleSearch = useCallback((search: string) => {
-    console.log("Search term updated:", search);
-    setSearchTerm(search.toLowerCase().trim());
-  }, []);
-  // const debouncedSearch = debounce(handleSearch, 500);
-  const debouncedSearch = useMemo(() => debounce(handleSearch, 500), []);
+  const debouncedSearch = useMemo(
+    () =>
+      debounce((search: string) => {
+        console.log("Search input updated:", search);
+        setSearchTerm(search.toLowerCase().trim());
+      }, 500),
+    []
+  );
 
   const filteredProducts = useMemo(() => {
+    console.log("Filter products");
     return products
       .filter((p: any) =>
         selectedCategory ? p.category === selectedCategory : true

@@ -1,4 +1,4 @@
-import { useState, createContext, useEffect } from "react";
+import { useState, createContext } from "react";
 import type { ReactNode } from "react";
 
 interface CartItem {

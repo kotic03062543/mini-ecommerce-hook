@@ -2,15 +2,17 @@ import { useContext } from "react";
 import { CartContext } from "../../contexts/CartContext";
 
 function ProductSummaryViewModel() {
+  console.log("ProductSummaryViewModel");
   const cartContext = useContext(CartContext);
   if (!cartContext)
     throw new Error("CartContext is not available. Please wrap in provider.");
   const { setCarts, useCart } = cartContext;
 
-  const total = useCart.reduce(
-    (acc, item) => acc + item.product.price * item.quantity,
-    0
-  );
+  const total = useCart.reduce((acc, item) => {
+    console.log("Calculating item:", item.quantity);
+    return acc + item.product.price * item.quantity;
+  }, 0);
+
   const upQuantity = (productId: string) => {
     console.log("upQuantity", productId);
     setCarts((prevCart) => {

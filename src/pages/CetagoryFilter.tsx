@@ -1,5 +1,3 @@
-import React from "react";
-
 function CetagoryFilter() {
   return (
     <section className="bg-gray-50 py-8 antialiased dark:bg-gray-900 md:py-16">
