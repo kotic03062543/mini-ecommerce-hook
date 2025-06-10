@@ -7,33 +7,34 @@ import { serviceGetProducts } from "../../services/Products";
 import { serviceGetCategorie } from "../../services/Catagorie";
 
 function useProductsViewModel() {
-  const { data, isLoading } = useQuery({
+  const { data: products = [], isLoading } = useQuery({
     queryKey: ["getProducts"],
     queryFn: async () => {
       // console.log("Fetching products...");
       return await serviceGetProducts();
     },
   });
-  const { data: Catagorie, isLoading: CatagorieLoading } = useQuery({
+  const { data: categories = [], isLoading: CatagorieLoading } = useQuery({
     queryKey: ["getCategories"],
     queryFn: async () => {
-      // console.log("Fetching categories...");
+      // console.log("Fetching categories...") ;
       return await serviceGetCategorie();
     },
   });
 
-  const products = data || [];
-  const categories = Catagorie || [];
+  // const products = data || [];
+  // const categories = Catagorie || [];
 
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [searchTerm, setSearchTerm] = useState("");
+  const cartContext = useContext(CartContext);
+  if (!cartContext)
+    throw new Error("CartContext is not available. Please wrap in provider.");
 
   const navigate = useNavigate();
 
   // add to cart
-  const cartContext = useContext(CartContext);
-  if (!cartContext)
-    throw new Error("CartContext is not available. Please wrap in provider.");
+  // ย้ายไปไว้ใน context จะได้ใช้ได้หลายหน้า
   const { setCarts } = cartContext;
   function updateCartWithProduct(product: any) {
     console.log("Adding product to cart:", product);
@@ -53,15 +54,12 @@ function useProductsViewModel() {
   }
 
   // Update set search term
-  const debouncedSearch = useMemo(
-    () =>
-      debounce((search: string) => {
-        console.log("Search input updated:", search);
-        setSearchTerm(search.toLowerCase().trim());
-      }, 500),
-    []
-  );
+  const debouncedSearch = debounce((search: string) => {
+    console.log("Search input updated:", search);
+    setSearchTerm(search.toLowerCase().trim());
+  }, 500);
 
+  //จัดให้เหลือรอบเดียว
   const filteredProducts = useMemo(() => {
     console.log("Filter products");
     return products

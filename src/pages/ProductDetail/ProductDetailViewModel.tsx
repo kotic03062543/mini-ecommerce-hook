@@ -23,7 +23,6 @@ function ProductDetailViewModel() {
   const breadcrumbItems = [
     { label: "Home", link: "/" },
     { label: "ProductDetail", link: `/ProductDetail/${productId}` },
-    { label: product?.title, link: "#" },
   ];
 
   return {

@@ -5,11 +5,11 @@ import CartContextProvider from "./contexts/CartContext";
 function App() {
   return (
     <>
-      <CartContextProvider>
-        <UserContextProvider>
+      <UserContextProvider>
+        <CartContextProvider>
           <AppRouter />
-        </UserContextProvider>
-      </CartContextProvider>
+        </CartContextProvider>
+      </UserContextProvider>
     </>
   );
 }

@@ -36,13 +36,13 @@ function Home() {
   //   }
   // }
 
-  const breadcrumbItems = [{ label: "Home", link: "/" }];
+  // const breadcrumbItems = [{ label: "Home", link: "/" }];
 
   return (
     <>
-      <div className="flex justify-center items-center mt-5">
+      {/* <div className="flex justify-center items-center mt-5">
         <Breadcrumb items={breadcrumbItems} />
-      </div>
+      </div> */}
 
       <Catagorie />
       <Products />
