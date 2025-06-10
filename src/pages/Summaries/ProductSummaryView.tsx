@@ -29,13 +29,17 @@ function ProductSummary({ onClose }: { onClose: () => void }) {
               className="flex items-center justify-between border-b pb-2"
             >
               <div className="flex items-center gap-4">
-                <img
-                  src={item.product.image}
-                  alt={item.product.title}
-                  className="w-16 h-16 object-cover rounded"
-                />
+                <div className="w-16 h-16">
+                  <img
+                    src={item.product.image}
+                    className="w-full h-full object-fit"
+                  />
+                </div>
+
                 <div>
-                  <h4 className="font-semibold">{item.product.title}</h4>
+                  <h4 className="font-semibold line-clamp-1 break-words">
+                    {item.product.title}
+                  </h4>
                   <p className="text-sm text-gray-500">
                     {item.product.price.toFixed(2)} บาท
                   </p>

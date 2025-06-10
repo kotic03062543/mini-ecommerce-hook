@@ -33,7 +33,7 @@ function ProductDetail() {
         <img
           src={product.image}
           alt={product.title}
-          className="w-full px-5 md:w-1/2 espect-[4/3] object-cover rounded-lg mb-5 md:mb-0 md:aspect-[4/3] md:h-full md:max-w-[400px] mx-auto"
+          className="w-full px-5 md:w-1/2 espect-[4/3] object-fit rounded-lg mb-5 md:mb-0 md:aspect-[4/3] md:h-full md:max-w-[400px] mx-auto"
         />
         <div className="w-full flex flex-col gap-3">
           <p className="text-2xl font-bold">{product.title}</p>

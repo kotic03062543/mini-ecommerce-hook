@@ -23,7 +23,7 @@ const CartItem: React.FC<CartItemProps> = ({
     >
       <div className="aspect-[4/3] w-full overflow-hidden">
         <img
-          className="w-full h-full object-cover"
+          className="w-full h-full object-fit"
           src={product.image}
           alt={product.title}
         />
