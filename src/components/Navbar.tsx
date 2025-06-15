@@ -57,6 +57,9 @@ function Navbar() {
           >
             About
           </Link>
+          <Link to="/LifeNavigate" className="text-md text-gray-800 hover:text-gray-600">
+            Life Navigate
+          </Link>
         </div>
 
         {/* Cart + Avatar + Username */}
@@ -95,6 +98,9 @@ function Navbar() {
             className="text-md text-gray-800 hover:text-gray-600"
           >
             About
+          </Link>
+          <Link to="/LifeNavigate" className="text-md text-gray-800 hover:text-gray-600">
+            Life Navigate
           </Link>
         </div>
       )}

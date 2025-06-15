@@ -37,7 +37,7 @@ function useProductsViewModel() {
   // ย้ายไปไว้ใน context จะได้ใช้ได้หลายหน้า
   const { setCarts } = cartContext;
   function updateCartWithProduct(product: any) {
-    console.log("Adding product to cart:", product);
+    // console.log("Adding product to cart:", product);
     setCarts((prevCart) => {
       const existingIndex = prevCart.findIndex(
         (item) => item.product.id === product.id
@@ -61,14 +61,18 @@ function useProductsViewModel() {
 
   //จัดให้เหลือรอบเดียว
   const filteredProducts = useMemo(() => {
-    console.log("Filter products");
-    return products
-      .filter((p: any) =>
-        selectedCategory ? p.category === selectedCategory : true
-      )
-      .filter((p: any) =>
-        searchTerm ? p.title.toLowerCase().includes(searchTerm) : true
-      );
+    return products.filter((p: any) => {
+      if (selectedCategory && p.category !== selectedCategory) {
+        return false; // ถ้าเลือกหมวดหมู่ และสินค้าหมวดหมู่ไม่ตรง → ไม่เอา
+      }
+      if (
+        searchTerm &&
+        !p.title.toLowerCase().includes(searchTerm.toLowerCase())
+      ) {
+        return false; // ถ้าค้นหาแล้วชื่อสินค้าไม่เจอคำค้น → ไม่เอา
+      }
+      return true; // ผ่านเงื่อนไขทั้งหมด → เอาไว้
+    });
   }, [products, selectedCategory, searchTerm]);
 
   return {

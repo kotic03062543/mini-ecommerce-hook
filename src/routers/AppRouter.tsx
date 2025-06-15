@@ -5,6 +5,7 @@ import About from "../pages/About";
 import ProductDetail from "../pages/ProductDetail/ProductDetailView";
 import Layout from "../components/Layout";
 import Contract from "../pages/Contract";
+import QuestionFlow from "../pages/LifeNavigate/QtView";
 
 function AppRouter() {
   return (
@@ -38,6 +39,14 @@ function AppRouter() {
         element={
           <Layout>
             <Contract />
+          </Layout>
+        }
+      />
+      <Route
+        path="/LifeNavigate"
+        element={
+          <Layout>
+            <QuestionFlow />
           </Layout>
         }
       />

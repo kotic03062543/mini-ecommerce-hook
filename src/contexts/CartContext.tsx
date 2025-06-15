@@ -1,4 +1,4 @@
-import { useState, createContext } from "react";
+import { useState, createContext, useMemo } from "react";
 import type { ReactNode } from "react";
 
 interface CartItem {
@@ -17,15 +17,25 @@ interface item {
 interface CartContextType {
   useCart: CartItem[];
   setCarts: React.Dispatch<React.SetStateAction<CartItem[]>>;
+  total: number;
 }
 
 export const CartContext = createContext<CartContextType | null>(null);
 
 function CartContextProvider({ children }: { children: ReactNode }) {
   const [useCart, setCarts] = useState<CartItem[]>([]);
-  console.log("useCart", useCart);
+
+  const total = useMemo(() => {
+    // console.log("Calculating total in context");
+    return useCart.reduce(
+      (acc, item) => acc + item.product.price * item.quantity,
+      0
+    );
+  }, [useCart]);
+
+  // console.log("useCart", useCart);
   return (
-    <CartContext.Provider value={{ useCart, setCarts }}>
+    <CartContext.Provider value={{ useCart, setCarts, total }}>
       {children}
     </CartContext.Provider>
   );

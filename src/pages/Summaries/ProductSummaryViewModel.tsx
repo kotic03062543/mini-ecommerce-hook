@@ -2,19 +2,22 @@ import { useContext } from "react";
 import { CartContext } from "../../contexts/CartContext";
 
 function ProductSummaryViewModel() {
-  console.log("ProductSummaryViewModel");
+  // console.log("ProductSummaryViewModel");
   const cartContext = useContext(CartContext);
   if (!cartContext)
     throw new Error("CartContext is not available. Please wrap in provider.");
-  const { setCarts, useCart } = cartContext;
+  const { setCarts, useCart, total } = cartContext;
 
-  const total = useCart.reduce((acc, item) => {
-    console.log("Calculating item:", item.quantity);
-    return acc + item.product.price * item.quantity;
-  }, 0);
+  // const total = useMemo(() => {
+  //   console.log("Calculating total");
+  //   return useCart.reduce((acc, item) => {
+  //     console.log("Calculating item:", item.quantity);
+  //     return acc + item.product.price * item.quantity;
+  //   }, 0);
+  // }, [useCart]);
 
   const upQuantity = (productId: string) => {
-    console.log("upQuantity", productId);
+    console.log("upQuantity");
     setCarts((prevCart) => {
       const existingIndex = prevCart.findIndex(
         (item) => item.product.id === productId
@@ -25,7 +28,7 @@ function ProductSummaryViewModel() {
     });
   };
   const downQuantity = (productId: string) => {
-    console.log("downQuantity", productId);
+    console.log("downQuantity");
     setCarts((prevCart) => {
       const existingIndex = prevCart.findIndex(
         (item) => item.product.id === productId
