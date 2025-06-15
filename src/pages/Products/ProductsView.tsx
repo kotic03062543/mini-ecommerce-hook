@@ -46,7 +46,7 @@ function Products() {
           categories.map((cat : any) => (
             <button
               key={cat}
-              className={`px-4 py-2 rounded border ${
+              className={`px-4 py-2 rounded border cursor-pointer ${
                 selectedCategory === cat
                   ? "bg-purple-500 text-white"
                   : "bg-white"

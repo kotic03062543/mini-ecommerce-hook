@@ -34,7 +34,10 @@ function Navbar() {
       <div className="flex justify-between items-center">
         {/* Logo + Hambur */}
         <div className="flex items-center gap-4">
-          <img src={Logo} alt="Logo" className="w-12 h-12" />
+          <Link to={"/"} className="flex items-center gap-2">
+            {" "}
+            <img src={Logo} alt="Logo" className="w-12 h-12" />
+          </Link>
           <div className="md:hidden">
             <button
               onClick={toggleMenu}
@@ -57,7 +60,10 @@ function Navbar() {
           >
             About
           </Link>
-          <Link to="/LifeNavigate" className="text-md text-gray-800 hover:text-gray-600">
+          <Link
+            to="/LifeNavigate"
+            className="text-md text-gray-800 hover:text-gray-600"
+          >
             Life Navigate
           </Link>
         </div>
@@ -99,7 +105,10 @@ function Navbar() {
           >
             About
           </Link>
-          <Link to="/LifeNavigate" className="text-md text-gray-800 hover:text-gray-600">
+          <Link
+            to="/LifeNavigate"
+            className="text-md text-gray-800 hover:text-gray-600"
+          >
             Life Navigate
           </Link>
         </div>

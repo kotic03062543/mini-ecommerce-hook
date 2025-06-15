@@ -46,7 +46,7 @@ function ProductDetail() {
           </div>
           <button
             onClick={() => updateCartWithProduct(product)}
-            className="mt-5 w-full bg-purple-600 text-white py-3 rounded hover:bg-purple-700"
+            className="mt-5 cursor-pointer w-full bg-purple-600 text-white py-3 rounded hover:bg-purple-700"
           >
             Add to cart
           </button>
