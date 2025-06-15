@@ -1,6 +1,5 @@
 import Products from "./Products/ProductsView";
 import Catagorie from "./Catagorie";
-import Breadcrumb from "../components/Breadcrumb";
 
 function Home() {
   // const getData = async () => {
@@ -40,10 +39,6 @@ function Home() {
 
   return (
     <>
-      {/* <div className="flex justify-center items-center mt-5">
-        <Breadcrumb items={breadcrumbItems} />
-      </div> */}
-
       <Catagorie />
       <Products />
     </>

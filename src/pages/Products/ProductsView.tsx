@@ -2,6 +2,7 @@ import { useMemo } from "react";
 import SearchInput from "../../components/SearchInput";
 import CartItem from "../CartItem";
 import useProductsViewModel from "./ProductsViewModel";
+import type { IProduct } from "./Type";
 
 function Products() {
   //เช็ค performance ว่า render ทุกครั้งไหม
@@ -24,7 +25,7 @@ function Products() {
   } = viewModel;
 
   const catchData = useMemo(() => {
-    return filteredProducts.map((p : any) => (
+    return filteredProducts.map((p : IProduct) => (
       <CartItem
         key={p.id}
         product={p}
@@ -43,7 +44,7 @@ function Products() {
       </div>
       <div className="flex flex-wrap justify-center gap-3 ">
         {categories && categories.length > 0 ? (
-          categories.map((cat : any) => (
+          categories.map((cat : string) => (
             <button
               key={cat}
               className={`px-4 py-2 rounded border cursor-pointer ${

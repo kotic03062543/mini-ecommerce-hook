@@ -5,6 +5,7 @@ import { debounce } from "lodash";
 import { useQuery } from "@tanstack/react-query";
 import { serviceGetProducts } from "../../services/Products";
 import { serviceGetCategorie } from "../../services/Catagorie";
+import type { IProduct } from "./Type";
 
 function useProductsViewModel() {
   const { data: products = [], isLoading } = useQuery({
@@ -36,7 +37,7 @@ function useProductsViewModel() {
   // add to cart
   // ย้ายไปไว้ใน context จะได้ใช้ได้หลายหน้า
   const { setCarts } = cartContext;
-  function updateCartWithProduct(product: any) {
+  function updateCartWithProduct(product: IProduct) {
     // console.log("Adding product to cart:", product);
     setCarts((prevCart) => {
       const existingIndex = prevCart.findIndex(
@@ -61,7 +62,7 @@ function useProductsViewModel() {
 
   //จัดให้เหลือรอบเดียว
   const filteredProducts = useMemo(() => {
-    return products.filter((p: any) => {
+    return products.filter((p: IProduct) => {
       if (selectedCategory && p.category !== selectedCategory) {
         return false; // ถ้าเลือกหมวดหมู่ และสินค้าหมวดหมู่ไม่ตรง → ไม่เอา
       }
